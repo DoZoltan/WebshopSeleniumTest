@@ -19,15 +19,13 @@ namespace WebshopSeleniumTest
         {
             Driver.Navigate().GoToUrl("http://localhost:4200/products/cpu");
 
-            // Válasszunk ki egy elemet a website-ról
-            // a webes alakalmazásunkat, amit tesztelni szeretnénk érdemes úgy elkészíteni, hogy minden html tag-nak van ID-ja,
-            // mert az alapján a legegyszerûbb kiválasztani az elemet, amivel csinálni szeretnénk valamit
+            // Ha nincs azonosítója az elemönknek / tag-ünk nek akkor az elérési útvonalát kell megadni
+            // --> a nav-link text-white class névvel elátott div tag-en belüli label, aminek az innertext-je Brand
+            // a Click()-el pedig rákattintunk a kiválasztott elemre
+            Driver.FindElement(By.XPath("//div[@class='nav-link text-white']//label[text()='Brand']")).Click();
 
-            // mivel az input mezõnknek (még) nincs ID-ja ezért a class neve alapján választom ki 
-            // a SendKeys-ben adjuk meg, hogy mi legyen a mezõbe írva
-            Driver.FindElement(By.ClassName("search-input")).SendKeys("2");
-
-            //ag-row-last
+            // majd írd be ezt az inputba
+            Driver.FindElement(By.ClassName("search-input")).SendKeys("Asus");
 
             Assert.Pass();
         }
