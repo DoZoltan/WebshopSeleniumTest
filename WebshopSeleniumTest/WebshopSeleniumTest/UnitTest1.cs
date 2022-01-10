@@ -11,15 +11,23 @@ namespace WebshopSeleniumTest
         [SetUp]
         public void Setup()
         {
-            // Hozzk létre a szükséges driver-t, itt adjuk meg, h milyen böngészõt akarunk használni
             Driver = new ChromeDriver();
         }
 
         [Test]
         public void Test1()
         {
-            //Adjuk meg a website címét, amit meg akarunk nyitni a kiválasztott böngészõvel
-            Driver.Navigate().GoToUrl("https://www.gamestar.hu/");
+            Driver.Navigate().GoToUrl("http://localhost:4200/products/cpu");
+
+            // Válasszunk ki egy elemet a website-ról
+            // a webes alakalmazásunkat, amit tesztelni szeretnénk érdemes úgy elkészíteni, hogy minden html tag-nak van ID-ja,
+            // mert az alapján a legegyszerûbb kiválasztani az elemet, amivel csinálni szeretnénk valamit
+
+            // mivel az input mezõnknek (még) nincs ID-ja ezért a class neve alapján választom ki 
+            // a SendKeys-ben adjuk meg, hogy mi legyen a mezõbe írva
+            Driver.FindElement(By.ClassName("search-input")).SendKeys("2");
+
+            //ag-row-last
 
             Assert.Pass();
         }
