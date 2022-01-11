@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 
 namespace WebshopSeleniumTest
 {
@@ -26,8 +27,11 @@ namespace WebshopSeleniumTest
             //A bal menüsávból az Add new product lehetõséget
             Driver.FindElement(By.XPath("//a[@href='/admin/products/add']")).Click();
 
-            // Majd válasszuk ki a dropdown input-ot ($x("//select[@id='socketType']"))
-            Driver.FindElement(By.XPath("//select[@id='socketType']//option[text()='G34']")).Click();
+            // Majd válasszuk ki a dropdown input-ot
+            var element = Driver.FindElement(By.XPath("//select[@id='socketType']"));
+
+            SelectElement selectElement = new SelectElement(element);
+            selectElement.SelectByText("G34");
 
             Assert.Pass();
         }
