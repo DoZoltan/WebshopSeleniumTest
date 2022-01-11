@@ -21,19 +21,22 @@ namespace WebshopSeleniumTest
             Driver.Navigate().GoToUrl("http://localhost:4200/products/cpu");
             Driver.Manage().Window.FullScreen();
 
-            // Válasszuk ki a fejléc menübõl az Admin lehetõséget, majd kattintsunk rá
-            Driver.FindElement(By.XPath("//a[@href='/admin']")).Click();
+            //Driver.FindElement(By.XPath("//a[@href='/admin']")).Click();
+            Driver.FindElement(By.LinkText("Admin")).Click();
 
-            //A bal menüsávból az Add new product lehetõséget
             Driver.FindElement(By.XPath("//a[@href='/admin/products/add']")).Click();
 
-            // Majd válasszuk ki a dropdown input-ot
             var element = Driver.FindElement(By.XPath("//select[@id='socketType']"));
 
-            SelectElement selectElement = new SelectElement(element);
-            selectElement.SelectByText("G34");
+            var isDispalyed = element.Displayed;
 
-            Assert.Pass();
+            if (isDispalyed)
+            {
+                SelectElement selectElement = new SelectElement(element);
+                selectElement.SelectByText("G34");
+            }
+
+            Assert.That(element.Displayed, Is.True);
         }
     }
 }
