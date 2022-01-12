@@ -13,15 +13,14 @@ namespace WebshopSeleniumTest
         public void Setup()
         {
             Driver = new ChromeDriver();
+            Driver.Manage().Window.Maximize();
         }
 
         [Test]
-        public void Test1()
+        public void TestDropdownAtCreateProductMenu()
         {
             Driver.Navigate().GoToUrl("http://localhost:4200/products/cpu");
-            Driver.Manage().Window.FullScreen();
 
-            //Driver.FindElement(By.XPath("//a[@href='/admin']")).Click();
             Driver.FindElement(By.LinkText("Admin")).Click();
 
             Driver.FindElement(By.XPath("//a[@href='/admin/products/add']")).Click();
@@ -37,6 +36,12 @@ namespace WebshopSeleniumTest
             }
 
             Assert.That(element.Displayed, Is.True);
+        }
+
+        [TearDown]
+        public void CloseBrowser()
+        {
+            Driver.Quit();
         }
     }
 }
