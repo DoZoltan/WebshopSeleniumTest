@@ -2,6 +2,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
 
 namespace WebshopSeleniumTest
@@ -22,11 +23,15 @@ namespace WebshopSeleniumTest
         {
             Driver.Navigate().GoToUrl("http://localhost:4200/products/cpu");
 
-            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+            //Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
 
             Driver.FindElement(By.XPath("//div[@class='product-container']//ul/li[3]")).Click();
-            Driver.FindElement(By.XPath("//div[@class='grid-container']//div[@class='ag-row-odd ag-row-no-focus ag-row ag-row-level-0 ag-row-position-absolute ag-row-last ag-after-created'][1]/div[2]")).Click();
 
+            var gridElement = wait.Until(ExpectedConditions.ElementExists(By.XPath("//div[@class='grid-container']//div[@class='ag-row-odd ag-row-no-focus ag-row ag-row-level-0 ag-row-position-absolute ag-row-last ag-after-created'][1]/div[2]")));
+
+            gridElement.Click();
 
             /*
             Driver.FindElement(By.LinkText("Admin")).Click();
