@@ -23,31 +23,34 @@ namespace WebshopSeleniumTest
         {
             Driver.Navigate().GoToUrl("http://localhost:4200/products/cpu");
 
-            //Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
 
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+            //WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
 
-            Driver.FindElement(By.XPath("//div[@class='product-container']//ul/li[3]")).Click();
+            //Driver.FindElement(By.XPath("//div[@class='product-container']//ul/li[3]")).Click();
 
-            var gridElement = wait.Until(ExpectedConditions.ElementExists(By.XPath("//div[@class='grid-container']//div[@class='ag-row-odd ag-row-no-focus ag-row ag-row-level-0 ag-row-position-absolute ag-row-last ag-after-created'][1]/div[2]")));
+            //var gridElement = wait.Until(ExpectedConditions.ElementExists(By.XPath("//div[@class='grid-container']//div[@class='ag-row-odd ag-row-no-focus ag-row ag-row-level-0 ag-row-position-absolute ag-row-last ag-after-created'][1]/div[2]")));
 
-            gridElement.Click();
+            //gridElement.Click();
 
-            /*
+            //Nyisd meg az admin felületet
             Driver.FindElement(By.LinkText("Admin")).Click();
 
-            Driver.FindElement(By.XPath("//a[@href='/admin/products/add']")).Click();
+            //Nyisd meg a termék frissítés felületet
+            Driver.FindElement(By.XPath("//a[@href='/admin/products/update']")).Click();
 
-            var element = Driver.FindElement(By.XPath("//select[@id='socketType']"));
+            //A termék frissítésnél üsd be a keresõ mezõbe, hogy ram
+            Driver.FindElement(By.ClassName("search-input")).SendKeys("ram");
 
-            var isDispalyed = element.Displayed;
+            //Az elsõ találatra kattints rá a grid-en
+            Driver.FindElement(By.XPath("//div[@class='ag-row-even ag-row-no-focus ag-row ag-row-level-0 ag-row-position-absolute ag-row-first ag-after-created']/div[1]")).Click();
 
-            if (isDispalyed)
-            {
-                SelectElement selectElement = new SelectElement(element);
-                selectElement.SelectByText("G34");
-            }
-            */
+            //Kattints rá a törlés gombra
+            Driver.FindElement(By.XPath("//button[text()='Delete']")).Click();
+
+            //Válts át a felugró megerõsítõ ablakra és fogadd el
+            Driver.SwitchTo().Alert().Accept();
+
             Assert.Pass();
         }
 
