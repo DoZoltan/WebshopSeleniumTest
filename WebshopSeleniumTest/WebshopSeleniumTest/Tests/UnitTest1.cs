@@ -6,7 +6,7 @@ using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
 
-namespace WebshopSeleniumTest
+namespace Tesets.WebshopSeleniumTest
 {
     public class Tests
     {
@@ -36,8 +36,6 @@ namespace WebshopSeleniumTest
 
             multiple.Perform();
 
-            string newTabUrl = "http://localhost:4200/admin";
-
             bool isSuccessful = true;
 
             if (Driver.WindowHandles.Count != 2)
@@ -49,13 +47,8 @@ namespace WebshopSeleniumTest
             {
                 Driver.SwitchTo().Window(Driver.WindowHandles[1]);
 
-                //Nyisd meg az admin felületet
-                //Driver.FindElement(By.LinkText("Admin")).Click();
-
-                //Nyisd meg a termék frissítés felületet
                 Driver.FindElement(By.XPath("//a[@href='/admin/products/update']")).Click();
 
-                //A termék frissítésnél üsd be a keresõ mezõbe, hogy ram
                 Driver.FindElement(By.ClassName("search-input")).SendKeys("ram");
             }
 
