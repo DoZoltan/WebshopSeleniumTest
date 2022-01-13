@@ -13,7 +13,6 @@ namespace WebshopSeleniumTest.POMs
     internal class ProductsPage
     {
         private IWebDriver _driver;
-        //private WebDriverWait wait;
 
         public string PageUrl { get; } = "http://localhost:4200/products/cpu";
         
@@ -37,8 +36,7 @@ namespace WebshopSeleniumTest.POMs
 
         public ProductsPage(IWebDriver driver)
         {
-            _driver = driver;
-            //wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            _driver = driver;;
             PageFactory.InitElements(driver, this);
         }
 

@@ -23,7 +23,6 @@ namespace Tesets.WebshopSeleniumTest
         [Test]
         public void PracticeTest()
         {
-            //Driver.Navigate().GoToUrl("http://localhost:4200/products/cpu");
             Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
 
             var productsPage = new ProductsPage(Driver);
