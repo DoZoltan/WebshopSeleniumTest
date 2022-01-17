@@ -5,49 +5,42 @@ using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
+using System.Threading;
 using WebshopSeleniumTest.POMs;
 
 namespace Tesets.WebshopSeleniumTest
 {
-    public class Tests
+    public class ProductsPageTests
     {
         private IWebDriver Driver;
+        private ProductsPage Page;
 
         [SetUp]
         public void Setup()
         {
             Driver = new ChromeDriver();
             Driver.Manage().Window.Maximize();
+            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+            Page = new ProductsPage(Driver);
         }
 
         [Test]
-        public void PracticeTest()
+        public void TestSearchByProductName()
         {
-            Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(30);
+            string searchText = "Test CPU 1";
 
-            var productsPage = new ProductsPage(Driver);
+            Page.OpenPage();
 
-            productsPage.OpenPage();
+            Page.SearchByNameSimulateHumanTyping(searchText);
 
-            //productsPage.MotherboardButtonClick();
-
-            //productsPage.ProductClickOnGridByProductName("Test Motherboard 1");
-
-            //productsPage.ProductClickOnGridByRowNumber(2);
-
-            //productsPage.SearchByBrand("Asus");
-
-            productsPage.SearchByName("moth");
-
-            Assert.Pass();
+            Assert.AreEqual(searchText, Page.GetProductNameByGridRowNumber(1));
         }
 
-        /*
         [TearDown]
         public void CloseBrowser()
         {
+            Thread.Sleep(1500);
             Driver.Quit();
         }
-        */
     }
 }
